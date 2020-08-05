@@ -1,0 +1,477 @@
+{
+	"info": {
+		"_postman_id": "48c64398-bb14-48ca-89c0-227cb8674a37",
+		"name": "CSP 2100 API",
+		"description": "Cisco Cloud Services Platform REST API Guide\nsee https://www.cisco.com/c/en/us/td/docs/switches/datacenter/csp_2100/rest_api/Cisco_CSP_REST_API_Guide.html#_Toc38966704",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Information About All Files",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{CSP_PASSWORD}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{CSP_USER}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.yang.data+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{CSP_SERVER}}/api/operational/repository/_operations/get_images",
+					"protocol": "https",
+					"host": [
+						"{{CSP_SERVER}}"
+					],
+					"path": [
+						"api",
+						"operational",
+						"repository",
+						"_operations",
+						"get_images"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an Image File",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{CSP_PASSWORD}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{CSP_USER}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/vnd.yang.data+json"
+					}
+				],
+				"url": {
+					"raw": "https://{{CSP_SERVER}}/api/operational/images/image/{{CSP_FILENAME}}/_operations/delete-image",
+					"protocol": "https",
+					"host": [
+						"{{CSP_SERVER}}"
+					],
+					"path": [
+						"api",
+						"operational",
+						"images",
+						"image",
+						"{{CSP_FILENAME}}",
+						"_operations",
+						"delete-image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Information About Clusters",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{CSP_PASSWORD}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{CSP_USER}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/vnd.yang.data+json"
+					}
+				],
+				"url": {
+					"raw": "https://{{CSP_SERVER}}/api/running/clusters?deep",
+					"protocol": "https",
+					"host": [
+						"{{CSP_SERVER}}"
+					],
+					"path": [
+						"api",
+						"running",
+						"clusters"
+					],
+					"query": [
+						{
+							"key": "deep",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "889f4b65-f5c1-4b0b-a164-ab46f2b7c0b9",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{CSP_PASSWORD}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{CSP_USER}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Requested-With",
+						"type": "text",
+						"value": "XMLHttpRequest"
+					}
+				],
+				"url": {
+					"raw": "https://{{CSP_SERVER}}/api/login",
+					"protocol": "https",
+					"host": [
+						"{{CSP_SERVER}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upload",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ba3fb985-946f-40b4-b41d-bb907c89546d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Requested-With",
+						"type": "text",
+						"value": "XMLHttpRequest",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/jegarnie/Downloads/test-ovf-env.xml"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://{{CSP_SERVER}}/api/uploadfile",
+					"protocol": "https",
+					"host": [
+						"{{CSP_SERVER}}"
+					],
+					"path": [
+						"api",
+						"uploadfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e2bc96dd-290a-4d1f-8387-d01f46273e52",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{CSP_PASSWORD}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{CSP_USER}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Requested-With",
+						"type": "text",
+						"value": "XMLHttpRequest"
+					}
+				],
+				"url": {
+					"raw": "https://{{CSP_SERVER}}/api/logout",
+					"protocol": "https",
+					"host": [
+						"{{CSP_SERVER}}"
+					],
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Information About a Cluster",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{CSP_PASSWORD}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{CSP_USER}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/vnd.yang.data+json"
+					}
+				],
+				"url": {
+					"raw": "https://{{CSP_SERVER}}/api/running/clusters/cluster/{{CSP_CLUSTER_NAME}}",
+					"protocol": "https",
+					"host": [
+						"{{CSP_SERVER}}"
+					],
+					"path": [
+						"api",
+						"running",
+						"clusters",
+						"cluster",
+						"{{CSP_CLUSTER_NAME}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create or Import a Service",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{CSP_PASSWORD}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{CSP_USER}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/vnd.yang.data+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"service\": {\n        \"name\": \"{{CSP_SERVICE_NAME}}\",\n        \"iso_name\": \"{{CSP_SERVICE_OVA}}\",\n        \"power\": \"{{CSP_SERVICE_POWER}}\",\n        \"description\": \"{{CSP_SERVICE_DESCRIPTION}}\",\n        \"memory\": \"{{CSP_SERVICE_MEM}}\",\n        \"numcpu\": \"{{CSP_SERVICE_CPU}}\",\n        \"vnics\": {\n            \"vnic\": [\n                {{CSP_SERVICE_VNIC}}\n            ]\n        },\n        \"monitoring\": {\n            \"status\": \"{{CSP_SERVICE_MONITORING_STATUS}}\"\n        },\n        \"storage_disks\": {\n            \"storage_disk\": [\n                {{CSP_SERVICE_STORAGE}}\n            ]\n        },\n        \"day0_filename\": \"{{CSP_SERVICE_DAY0_FILENAME}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://{{CSP_SERVER}}/api/running/services",
+					"protocol": "https",
+					"host": [
+						"{{CSP_SERVER}}"
+					],
+					"path": [
+						"api",
+						"running",
+						"services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Cluster",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{CSP_PASSWORD}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{CSP_USER}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/vnd.yang.data+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"cluster\": \n    [\n        {\n            \"name\":\"{{CSP_CLUSTER_NAME}}\", \n            \"nodes\": \n                {\n                    \"node\": [{\n                        \"member_ip\":\"{{CSP_CLUSTER_MEMBER_IP}}\"}\n                        ]\n                }\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "https://{{CSP_SERVER}}/api/running/clusters",
+					"protocol": "https",
+					"host": [
+						"{{CSP_SERVER}}"
+					],
+					"path": [
+						"api",
+						"running",
+						"clusters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Service",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{CSP_PASSWORD}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{CSP_USER}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/vnd.yang.data+json"
+					}
+				],
+				"url": {
+					"raw": "https://{{CSP_SERVER}}/api/running/services/service/{{CSP_SERVICE_NAME}}",
+					"protocol": "https",
+					"host": [
+						"{{CSP_SERVER}}"
+					],
+					"path": [
+						"api",
+						"running",
+						"services",
+						"service",
+						"{{CSP_SERVICE_NAME}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
